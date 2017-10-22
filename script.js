@@ -14,7 +14,7 @@ function prependIdeaCard() {
 
   $('#idea-card-storage').prepend(
     `
-    <article class="idea-card" id="unique-id">
+    <article class="idea-card" id="${Date.now()}">
     <div id="card-header">
     <h2 class="card-title">${titleInput}</h2> 
     <button id="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
