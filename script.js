@@ -1,5 +1,6 @@
 
 $('#save-button').on('click', addIdeaCard);
+$('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard)
 
 function prependIdeaCard() {
   var titleInput = $('#title-input').val();
@@ -28,6 +29,10 @@ function addIdeaCard() {
   event.preventDefault();
   prependIdeaCard();
   clearInputs();
+}
+
+function deleteIdeaCard(){
+  $(this).parent().parent().remove();
 }
 
 function clearInputs() {
