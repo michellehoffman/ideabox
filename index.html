@@ -1,12 +1,14 @@
 <!doctype html>
-<html>
-<head>
-  <link type="text/css" rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:700" rel="stylesheet">
-  <title>Ideabox</title>
-</head>
-<body>
-  <section class="user-input">
+<html lang='en'>
+  <head>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:700" rel="stylesheet">
+    <title>Ideabox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+  </head>
+  <body>
+    <section class="user-input">
     <h1>idea<span style="color: #6D6E71;">box</h1>
     <form>
       <label for="title-input">
@@ -17,8 +19,39 @@
       </label>
       <button id="save-button">save</button>
     </form>
-  </section>
-  <section class="idea-card-storage">
-  </section>
-</body> 
+    </section>
+    <section id="idea-card-storage">
+      <article class="idea-card" id="unique-id">
+        <div id="card-header">
+          <h2 class="card-title">Example Idea 1</h2> 
+          <img id="delete-button" src="FEE-ideabox-icon-assets/transparent.png" alt="delete button">
+        </div>
+          <p class="card-body">Hacker unicorn venture capital prototype thinker-maker-doer personas parallax sticky note convergence innovate. Intuitive ideate iterate parallax sticky note long shadow fund waterfall.
+          </p>
+        <div id="card-footer">
+          <img id="upvote-button" src="FEE-ideabox-icon-assets/transparent.png" alt="upvote button">
+          <img id="downvote-button" src="FEE-ideabox-icon-assets/transparent.png" alt="downvote button">
+          <h3 class="quality">quality:</h3>
+          <h3 class="quality-option"> swill</h3>
+        </div>
+      </article>
+      <article class="idea-card" id="unique-id">
+        <div id="card-header">
+          <h2 class="card-title">Example Idea 2</h2> 
+          <img id="delete-button" src="FEE-ideabox-icon-assets/transparent.png" alt="delete button">
+        </div>
+          <p class="card-body">Hacker unicorn venture capital prototype thinker-maker-doer personas parallax sticky note convergence innovate. Intuitive ideate iterate parallax sticky note long shadow fund waterfall.
+          </p>
+        <div id="card-footer">
+          <img id="upvote-button" src="FEE-ideabox-icon-assets/transparent.png" alt="upvote button">
+          <img id="downvote-button" src="FEE-ideabox-icon-assets/transparent.png" alt="downvote button">
+          <h3 class="quality">quality:</h3>
+          <h3 class="quality-option"> swill</h3>
+        </div>
+      </article>
+    </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="jquery-3.2.1.min.js"><\/script>')</script>
+    <script type="text/javascript" src="script.js"></script>
+  </body> 
 </html>
