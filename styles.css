@@ -37,10 +37,13 @@ h1 {
 
 input {
   border: 1px solid #939598;
-  color: #939598;
   font-size: 20px;
   padding: 0px 8px;
   width: 50%;
+}
+
+input::placeholder {
+  color: #939598;
 }
 
 .user-input {
