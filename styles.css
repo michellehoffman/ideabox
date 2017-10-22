@@ -8,7 +8,7 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-button {
+#save-button {
   background-color: #00A79D;
   border-color: #00A79D;
   border-radius: 0px;
@@ -17,11 +17,11 @@ button {
   width: 51%;
 }
 
-button:hover {
+#save-button:hover {
   background-color: #045E55;
 }
 
-button,
+#save-button,
 input {
   display: inline-block;
   height: 40px;
@@ -79,9 +79,14 @@ div {
 }
 
 /*SVG BUTTONS*/
-img {
+button {
+  background-color: white;
+  border: none;
+  height: 30px;
   width: 30px;
   display: inline-block;
+  margin: 0px;
+  padding: 0px;
 }
 
 #delete-button {
@@ -91,7 +96,6 @@ img {
 
 #delete-button:hover {
   background-image: url('FEE-ideabox-icon-assets/delete-hover.svg');
-  float: right;
 }
 
 #upvote-button {
@@ -124,16 +128,15 @@ p {
 h3 {
   color: #6D6E71;
   font-size: 1em;
+  display: inline;
 }
 
 h3.quality {
   font-family: "Roboto Slab", serif;
   font-weight: 700;
-  display: inline-block;
 }
 
 h3.quality-option {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
-  display: inline-block;
 }
