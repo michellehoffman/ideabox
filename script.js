@@ -1,5 +1,5 @@
 
-$('#save-button').on('click', preventDefault);
+$('#save-button').on('click', addIdeaCard);
 
 function prependIdeaCard() {
   var titleInput = $('#title-input').val();
@@ -24,7 +24,7 @@ function prependIdeaCard() {
     );
 }
 
-function preventDefault() {
+function addIdeaCard() {
   event.preventDefault();
   prependIdeaCard();
 }
