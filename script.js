@@ -49,14 +49,14 @@ function clearInputs() {
 function upvoteQuality(){
   i++;
   if (i <= 2){  
-    console.log(quality[i]);
+    $(this).parent().find('.quality-option').text(quality[i]);
   }
 }
 
 function downvoteQuality(){
   i--;
   if (i >= 0){
-    console.log(quality[i]);
+    $(this).parent().find('.quality-option').text(quality[i]);
   }
 }
 
