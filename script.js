@@ -27,4 +27,10 @@ function prependIdeaCard() {
 function addIdeaCard() {
   event.preventDefault();
   prependIdeaCard();
+  clearInputs();
+}
+
+function clearInputs() {
+  $('#title-input').val('');
+  $('#body-input').val('');
 }
