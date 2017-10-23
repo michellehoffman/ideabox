@@ -16,10 +16,10 @@ function prependIdeaCard() {
     `
     <article class="idea-card" id="${Date.now()}">
     <div id="card-header">
-    <h2 class="card-title">${titleInput}</h2> 
+    <h2 class="card-title" contenteditable="true">${titleInput}</h2> 
     <button id="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
     </div>
-    <p class="card-body">${bodyInput}</p>
+    <p class="card-body" contenteditable="true">${bodyInput}</p>
     <div id="card-footer">
     <button id="upvote-button" name="upvote button"></button>
     <button id="downvote-button" name="downvote button"></button>
@@ -60,3 +60,6 @@ function downvoteQuality(){
   }
 }
 
+function callCardId() {
+  console.log($(this).parent().parent().attr('id'));
+}
