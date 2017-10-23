@@ -1,5 +1,6 @@
 
-$('#save-button').on('click', addIdeaCard);
+// $('#save-button').on('click', addIdeaCard);
+$('#save-button').on('click', createCard)
 $('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard)
 $('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
@@ -7,6 +8,29 @@ $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
 
 var quality = ['swill', 'plausible', 'genius'];
 var i = 0;
+//put it in storage and then pull it out
+
+function MakeIdeaCardObject(id, title, body){
+  this.id = id;
+  this.title = title;
+  this.body = body;
+  this.quality = quality[i];
+}
+
+function createCard() {
+  event.preventDefault();
+  var storedObjDateStamp = Date.now();
+  var newCard = new MakeIdeaCardObject( storedObjDateStamp, $('#title-input').val(), $('#body-input').val())
+  console.log(newCard);
+  var stringifiedObject = JSON.stringify(newCard);
+  localStorage.setItem(storedObjDateStamp, stringifiedObject);
+  console.log(localStorage.getItem(storedObjDateStamp));
+  var retrievedObject = localStorage.getItem(storedObjDateStamp);
+  var parsedObject = JSON.parse(retrievedObject);
+  console.log(parsedObject.id);
+  clearInputs();
+}
+
 
 function prependIdeaCard() {
   var titleInput = $('#title-input').val();
