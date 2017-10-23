@@ -3,7 +3,14 @@ $('#save-button').on('click', addIdeaCard);
 $('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard)
 $('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
-
+// $('.card-title').on('keyup', function(e) {
+//   if (e.keyCode == 13) {
+//     //Prevent insertion of a return
+//     //You could do other things here, for example
+//     //focus on the next field
+//     $(this).parent().focus();
+//   }
+// });
 
 var quality = ['swill', 'plausible', 'genius'];
 var i = 0;
@@ -24,7 +31,7 @@ function prependIdeaCard() {
     <button id="upvote-button" name="upvote button"></button>
     <button id="downvote-button" name="downvote button"></button>
     <h3 class="quality">quality:</h3>
-    <h3 class="quality-option"> ${quality[0]}</h3>
+    <h3 class="quality-option"> ${quality[i]}</h3>
     </div>
     </article>
     `
@@ -63,3 +70,10 @@ function downvoteQuality(){
 function callCardId() {
   console.log($(this).parent().parent().attr('id'));
 }
+
+// function NewIdea(id,title,body) {
+//   this.name = id;
+//   this.title = title;
+//   this.body = body;
+//   this.quality = quality[i] || quality[0]
+// }
