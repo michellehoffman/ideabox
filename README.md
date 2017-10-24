@@ -1,6 +1,6 @@
 # Ideabox
 
-Turing School Mod 1 assignment to create idea cards in localStorage, persist them and edit them. 
+Turing School Mod 1 assignment to create idea cards in localStorage, retrieve them and edit them. 
 
 ## Architecture
 
@@ -24,8 +24,8 @@ By default, the idea’s “quality” should default to the lowest setting (i.e
 
 When visiting the application, the user should:
 
-See a list of all existing ideas, including the title, body, and quality for each idea.
-Ideas should appear in descending chronological order (with the most recently created idea at the top).
+* See a list of all existing ideas, including the title, body, and quality for each idea.
+* Ideas should appear in descending chronological order (with the most recently created idea at the top).
 
 ### Adding a new idea
 
@@ -33,7 +33,7 @@ On the application’s main page, a user should:
 
 * See two text boxes for entering the “Title” and “Body” for a new idea, and a “Save” button for committing that idea.
 
-When a user clicks “Save”:
+### When a user clicks “Save”:
 
 * A new idea with the provided title and body should appear in the idea list.
 * The text fields should be cleared and ready to accept a new idea.
@@ -71,3 +71,9 @@ We’d like our users to be able to easily find specific ideas they already crea
 * At the top of the idea list, include a text field labeled “Search”.
 * As a user types in the search box, the list of ideas should filter in real time to only display ideas whose title or body include the user’s text. The page should not reload.
 * Clearing the search box should restore all the ideas to the list.
+
+## Layout comps: 
+
+(http://frontend.turing.io/assets/images/projects/ideabox/ideabox-01.png)
+
+(http://frontend.turing.io/assets/images/projects/ideabox/ideabox-02.png)
