@@ -2,10 +2,10 @@
 // $('#save-button').on('click', addIdeaCard);
 $(document).ready(function() {
   // findExistingCards();
-  showCards(findExistingCards());
+  retrieveObjPutOnPage(findExistingCards());
 });
-$('#save-button').on('click', createCard)
-$('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard)
+$('#save-button').on('click', retrieveObjPutOnPage(sendCardToLocalStorage(createCard)));
+$('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard);
 $('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
 
@@ -19,7 +19,7 @@ $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
 // });
 
 var quality = ['swill', 'plausible', 'genius'];
-var i = 0;
+//var i = 0; Don't do i globally b/c it causes problems for all for-loops
 //put it in storage and then pull it out
 
 function IdeaCardObject(id, title, body){
@@ -29,19 +29,43 @@ function IdeaCardObject(id, title, body){
   this.quality = quality[i];
 }
 
+// function createCard() {
+//   event.preventDefault();
+//   var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val())
+//   console.log(newCard);
+//   var stringifiedObject = JSON.stringify(newCard);
+//   localStorage.setItem(id, stringifiedObject);
+//   console.log(localStorage.getItem(id));
+//   var retrievedObject = localStorage.getItem(id);
+//   var parsedObject = JSON.parse(retrievedObject);
+//   console.log(parsedObject.id);
+//   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body);
+//   clearInputs();
+// }
+
+
+//just creating an object
 function createCard() {
   event.preventDefault();
-  var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val())
-  console.log(newCard);
-  var stringifiedObject = JSON.stringify(newCard);
-  localStorage.setItem(id, stringifiedObject);
-  console.log(localStorage.getItem(id));
-  var retrievedObject = localStorage.getItem(id);
+  var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val());
+  return newCard;
+}
+
+function sendCardToLocalStorage(card){
+  var stringifiedObject = JSON.stringify(card);
+  localStorage.setItem(card.id, stringifiedObject);
+}
+//takes an object - stringify what is passed to it, take that new variable and send to local storage
+
+function retrieveObjPutOnPage(card){
+  var retrievedObject = localStorage.getItem(card.id);
+  console.log(card.id);
   var parsedObject = JSON.parse(retrievedObject);
   console.log(parsedObject.id);
   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body);
-  clearInputs();
+  clearInputs();s
 }
+//need to iterate through the array with for-each
 
 
 function prependIdeaCard(id, title, body) {
@@ -80,10 +104,11 @@ function prependIdeaCard(id, title, body) {
 
 function findExistingCards() {
   var keyValues = []
-  var keys = Object.keys(localStorage)
+  var keys = Object.keys(localStorage);
   for (var i = 0; i < keys.length; i++) {
-    keyValues.push(new IdeaCardObject(localStorage.getItem(keys[i])));
+    keyValues.push(JSON.parse(localStorage.getItem(keys[i])));
   }
+  console.log(keyValues);
   return keyValues;
 }
 
