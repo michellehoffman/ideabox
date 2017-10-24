@@ -1,10 +1,10 @@
 
 // $('#save-button').on('click', addIdeaCard);
-$(document).ready(function() {
-  // findExistingCards();
-  retrieveObjPutOnPage(findExistingCards());
-});
-$('#save-button').on('click', retrieveObjPutOnPage(sendCardToLocalStorage(createCard)));
+// $(document).ready(function() {
+//   // findExistingCards();
+//   // retrieveObjPutOnPage(findExistingCards());
+// });
+$('#save-button').on('click', createCard);
 $('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard);
 $('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
@@ -26,7 +26,7 @@ function IdeaCardObject(id, title, body){
   this.id = id;
   this.title = title;
   this.body = body;
-  this.quality = quality[i];
+  this.quality = quality[0];
 }
 
 // function createCard() {
@@ -48,22 +48,26 @@ function IdeaCardObject(id, title, body){
 function createCard() {
   event.preventDefault();
   var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val());
-  return newCard;
+  // console.log(newCard);
+  // return newCard;
+  sendCardToLocalStorage(newCard);
 }
 
-function sendCardToLocalStorage(card){
-  var stringifiedObject = JSON.stringify(card);
-  localStorage.setItem(card.id, stringifiedObject);
+function sendCardToLocalStorage(newCard){
+  console.log(newCard.id);
+  var stringifiedObject = JSON.stringify(newCard);
+  localStorage.setItem(newCard.id, stringifiedObject);
+  // console.log(newCard.id, stringifiedObject);
+  retrieveObjPutOnPage(newCard.id);
 }
 //takes an object - stringify what is passed to it, take that new variable and send to local storage
 
-function retrieveObjPutOnPage(card){
-  var retrievedObject = localStorage.getItem(card.id);
-  console.log(card.id);
+function retrieveObjPutOnPage(id){
+  var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
-  console.log(parsedObject.id);
+  console.log(parsedObject);
   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body);
-  clearInputs();s
+  clearInputs();
 }
 //need to iterate through the array with for-each
 
@@ -95,7 +99,7 @@ function prependIdeaCard(id, title, body) {
     <button id="upvote-button" name="upvote button"></button>
     <button id="downvote-button" name="downvote button"></button>
     <h3 class="quality">quality:</h3>
-    <h3 class="quality-option"> ${quality[i]}</h3>
+    <h3 class="quality-option"> ${quality[0]}</h3>
     </div>
     </article>
     `
@@ -111,6 +115,8 @@ function findExistingCards() {
   console.log(keyValues);
   return keyValues;
 }
+
+
 
 function showCards(cards = []) {
   for(var i = 0; i < cards.length; i++){
