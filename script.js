@@ -13,7 +13,6 @@ $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
 //   }
 // });
 
-var quality = ['swill', 'plausible', 'genius'];
 //var i = 0; Don't do i globally b/c it causes problems for all for-loops
 //put it in storage and then pull it out
 
@@ -36,7 +35,7 @@ function createCard() {
 }
 
 function sendCardToLocalStorage(newCard){
-  console.log(newCard.id);
+  // console.log(newCard.id);
   var stringifiedObject = JSON.stringify(newCard);
   localStorage.setItem(newCard.id, stringifiedObject);
   // console.log(newCard.id, stringifiedObject);
@@ -46,7 +45,7 @@ function sendCardToLocalStorage(newCard){
 function retrieveObjPutOnPage(id){
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
-  console.log(parsedObject);
+  // console.log(parsedObject);
   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body);
   clearInputs();
 }
@@ -59,6 +58,8 @@ function populateExistingCards(keyValues){
 }
 
 function prependIdeaCard(id, title, body) {
+  // declaring var quality here to see if that resolves error messaging
+  var quality = ['swill', 'plausible', 'genius'];
   // var titleInput = $('#title-input').val();
   // var bodyInput = $('#body-input').val();
 
@@ -82,10 +83,10 @@ function prependIdeaCard(id, title, body) {
     `
     </p>
     <div id="card-footer">
-    <button id="upvote-button" name="upvote button"></button>
-    <button id="downvote-button" name="downvote button"></button>
-    <h3 class="quality">quality:</h3>
-    <h3 class="quality-option"> swill</h3>
+      <button id="upvote-button" name="upvote button"></button>
+      <button id="downvote-button" name="downvote button"></button>
+      <h3 class="quality">quality:</h3>
+      <h3 class="quality-option">${quality[0]}</h3>
     </div>
     </article>
     `
@@ -96,11 +97,12 @@ function prependIdeaCard(id, title, body) {
 function findExistingCards() {
   var keyValues = []
   var keys = Object.keys(localStorage);
-  console.log(keys);
+  // console.log(keys);
   for (var i = 0; i < keys.length; i++) {
     keyValues.push(JSON.parse(localStorage.getItem(keys[i])));
+    // console.log(keys[i])
   }
-  console.log(keyValues);
+  // console.log(keyValues);
   return keyValues;
 }
 
@@ -128,20 +130,50 @@ function clearInputs() {
   $('#body-input').val('');
 }
 
-function upvoteQuality(){
-  i++;
-  if (i <= 2){  
-    $(this).parent().find('.quality-option').text(quality[i]);
+function upvoteQuality() {
+  var qualityArray = ['swill', 'plausible', 'genius'];
+  var currentQuality = $(this).siblings('.quality-option').text();
+  var currentIndex = qualityArray.indexOf(currentQuality);
+
+  if(currentIndex <= 2){
+    currentIndex++;
+    currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
+    console.log(currentQuality);
   }
+  // var i = 
+  
+  // if quality = swill
+  //   i = 0
+  // if quality = plausible
+  //   i = 1
+  // else quality = genius
+  //   i = 2;
+  // console.log();
+  // i++;
+  // if (i <= 2){  
+  //   $(this).parent().find('.quality-option').text(quality[i]);
+  // }
 }
 
-function downvoteQuality(){
+function downvoteQuality() {
   i--;
   if (i >= 0){
     $(this).parent().find('.quality-option').text(quality[i]);
   }
 }
 
-function callCardId() {
-  console.log($(this).parent().parent().attr('id'));
+// Looks like it is just calling the id not the object
+function callCardIdToChangeQuality() {
+  var id =  ($(this).parent().parent().attr('id'));
+  pullQualityFromStorage(id);
 }
+
+function pullQualityFromStorage(id) {
+  var retrievedObject = localStorage.getItem(JSON.parse(id));
+  console.log(id);
+  // retrievedObject logging as null
+  var parsedObject = JSON.parse(retrievedObject);
+}
+
+
+
