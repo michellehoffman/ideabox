@@ -138,7 +138,6 @@ function upvoteQuality() {
   if(currentIndex <= 2){
     currentIndex++;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
-    console.log(currentQuality);
   }
   // var i = 
   
@@ -155,11 +154,21 @@ function upvoteQuality() {
   // }
 }
 
+// WORKING! YAY :)
 function downvoteQuality() {
-  i--;
-  if (i >= 0){
-    $(this).parent().find('.quality-option').text(quality[i]);
+  var qualityArray = ['swill', 'plausible', 'genius'];
+  var currentQuality = $(this).siblings('.quality-option').text();
+  var currentIndex = qualityArray.indexOf(currentQuality);
+
+  if(currentIndex > 0){
+    currentIndex--;
+    currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
+
+  // i--;
+  // if (i >= 0){
+  //   $(this).parent().find('.quality-option').text(quality[i]);
+  // }
 }
 
 // Looks like it is just calling the id not the object
