@@ -118,9 +118,9 @@ function addIdeaCard() {
 }
 
 function deleteIdeaCard(){
-  $(this).parent().parent().remove();
-  // console.log($(this).closest(article.id));
-  // localStorage.removeItem(id)
+  $(this).closest('article').remove();
+  var cardId = $(this).closest('article').attr('id');
+  localStorage.removeItem(JSON.parse(cardId));
 }
 
 function clearInputs() {
