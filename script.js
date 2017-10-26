@@ -61,21 +61,21 @@ function prependIdeaCard(id, title, body, quality) {
     + id +
     `
     ">
-    <div id="card-header">
+    <div class="card-header">
     <h2 class="card-title" contenteditable="true">
     `
     + title +
     `</h2> 
-    <button id="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
+    <button class="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
     </div>
     <p class="card-body" contenteditable="true">
     `
     + body +
     `
     </p>
-    <div id="card-footer">
-      <button id="upvote-button" name="upvote button"></button>
-      <button id="downvote-button" name="downvote button"></button>
+    <div class="card-footer">
+      <button class="upvote-button" name="upvote button"></button>
+      <button class="downvote-button" name="downvote button"></button>
       <h3 class="quality">quality:</h3>
       <h3 class="quality-option">
     `  
@@ -126,7 +126,7 @@ function upvoteQuality() {
   var currentQuality = $(this).siblings('.quality-option').text();
   var currentIndex = qualityArray.indexOf(currentQuality);
 
-  if(currentIndex < 2){
+  if(currentIndex < 2) {
     currentIndex++;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
