@@ -40,7 +40,7 @@ function sendUpdatesToLocalStorage(updatedObject) {
 function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
-  prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body);
+  prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality);
   clearInputs();
 }
 
@@ -50,7 +50,7 @@ function populateExistingCards(keyValues) {
   }
 }
 
-function prependIdeaCard(id, title, body) {
+function prependIdeaCard(id, title, body, quality) {
   $('#idea-card-storage').prepend(
     `
     <article class="idea-card" id="
@@ -74,7 +74,11 @@ function prependIdeaCard(id, title, body) {
       <button id="upvote-button" name="upvote button"></button>
       <button id="downvote-button" name="downvote button"></button>
       <h3 class="quality">quality:</h3>
-      <h3 class="quality-option">swill</h3>
+      <h3 class="quality-option">
+    `  
+    + quality +
+    `
+    </h3>
     </div>
     </article>
     `
@@ -119,7 +123,7 @@ function upvoteQuality() {
   var currentQuality = $(this).siblings('.quality-option').text();
   var currentIndex = qualityArray.indexOf(currentQuality);
 
-  if(currentIndex <= 2){
+  if(currentIndex < 2){
     currentIndex++;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
