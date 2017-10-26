@@ -55,27 +55,27 @@ input::placeholder {
 }
 
 .search-bar {
-  text-align: center;
   padding-top: 20px;
+  text-align: center;
 }
   
 /*IDEA CARDS*/
 article {
   border-bottom: 1px solid #939598;
-  width: 50%;
-  padding: 20px 0px;
   left: 25%;
+  padding: 20px 0px;
   position: relative;
+  width: 50%;
 }
 
 h2 {
   color: #6D6E71;
+  display: inline-block;
   font-family: "Roboto Slab", serif;
   font-size: 2em;
   font-weight: 700;
-  display: inline-block;
-  vertical-align: center;
   margin-bottom: 20px;
+  vertical-align: center;
   width: 80%;
 }
 
@@ -88,19 +88,19 @@ p {
   font-family: "Open Sans", sans-serif;
   font-size: 1.2em;
   font-weight: 400;
-  margin-bottom: 30px;
   line-height: 1.2em;
+  margin-bottom: 30px;
 }
 
 /*SVG BUTTONS*/
 button {
   background-color: white;
   border: none;
-  height: 30px;
-  width: 30px;
   display: inline-block;
+  height: 30px;
   margin-right: 20px;
   padding: 0px;
+  width: 30px;
 }
 
 .delete-button {
@@ -133,11 +133,11 @@ button {
 
 /*QUALITY OPTION*/
 h3 {
-  color: #6D6E71;
-  font-size: 1em;
-  display: inline;
-  position: relative;
   bottom: 9px;
+  color: #6D6E71;
+  display: inline;
+  font-size: 1em;
+  position: relative;
 }
 
 h3.quality {
@@ -181,11 +181,6 @@ h3.quality-option {
   input,
   #save-button {
     width: 85%;
-  }
-
-  .body-input {
-    word-break: break-all;
-    height: 80%;
   }
 
   button {

@@ -74,6 +74,6 @@ We’d like our users to be able to easily find specific ideas they already crea
 
 ## Layout comps: 
 
-(http://frontend.turing.io/assets/images/projects/ideabox/ideabox-01.png)
+![full size image comp](http://frontend.turing.io/assets/images/projects/ideabox/ideabox-01.png)
 
-(http://frontend.turing.io/assets/images/projects/ideabox/ideabox-02.png)
+![mobile image comp](http://frontend.turing.io/assets/images/projects/ideabox/ideabox-02.png)
