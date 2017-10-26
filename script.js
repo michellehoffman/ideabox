@@ -6,17 +6,18 @@ $('#idea-card-storage').on('click', '.downvote-button', downvoteQuality);
 $('.card-title').on('blur', changeIdeaTitle);
 $('.card-body').on('blur', changeIdeaBody);
 $('#search-bar-input').on('keyup', searchString);
-
-
-  // function() {
-
-  // if (e.keyCode == 13) {
-  //   //Prevent insertion of a return
-  //   //You could do other things here, for example
-  //   //focus on the next field
-  //   $(this).parent().focus();
-//   }
-// };
+$('.card-title').on('keypress', function (event) {
+  if (13 == event.keyCode) {
+     event.preventDefault();
+     $('.card-title').blur();
+  }
+});
+$('.card-body').on('keypress', function (event) {
+  if (13 == event.keyCode) {
+     event.preventDefault();
+     $('.card-body').blur();
+  }
+});
 
 function IdeaCardObject(id, title, body) {
   this.id = id;
@@ -58,40 +59,25 @@ function populateExistingCards(keyValues) {
 function prependIdeaCard(id, title, body, quality) {
   $('#idea-card-storage').prepend(
     `
-    <article class="idea-card" id="
-    ` 
-    + id +
-    `
-    ">
-    <div class="card-header">
-    <h2 class="card-title" contenteditable="true">
-    `
-    + title +
-    `</h2> 
-    <button class="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
-    </div>
-    <p class="card-body" contenteditable="true">
-    `
-    + body +
-    `
-    </p>
-    <div class="card-footer">
-      <button class="upvote-button" name="upvote button"></button>
-      <button class="downvote-button" name="downvote button"></button>
-      <h3 class="quality">quality:</h3>
-      <h3 class="quality-option">
-    `  
-    + quality +
-    `
-    </h3>
-    </div>
+    <article class="idea-card" id="${id}">
+      <div class="card-header">
+        <h2 class="card-title" contenteditable="true">${title}</h2> 
+        <button class="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
+      </div>
+      <p class="card-body" contenteditable="true">${body}</p>
+      <div class="card-footer">
+        <button class="upvote-button" name="upvote button"></button>
+        <button class="downvote-button" name="downvote button"></button>
+        <h3 class="quality">quality:</h3>
+        <h3 class="quality-option">${quality}</h3>
+      </div>
     </article>
     `
     );
 }
 
 function findExistingCards() {
-  var keyValues = []
+  var keyValues = [];
   var keys = Object.keys(localStorage);
   for (var i = 0; i < keys.length; i++) {
     keyValues.push(JSON.parse(localStorage.getItem(keys[i])));
@@ -186,7 +172,9 @@ function searchString() {
   var userSearchInput = $('#search-bar-input').val();
   var lowercaseSearchInput = userSearchInput.toLowerCase();
   var filteredCards = cardObjectsArray.filter(function (object){
-    return object['body'].match(lowercaseSearchInput) || object['title'].match(lowercaseSearchInput);
+    var lowercaseObjectBody = object['body'].toLowerCase();
+    var lowercaseObjectTitle = object['title'].toLowerCase();
+    return lowercaseObjectBody.match(lowercaseSearchInput) || lowercaseObjectTitle.match(lowercaseSearchInput);
     }
   ) 
   clearAllCards();
