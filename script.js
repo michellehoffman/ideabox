@@ -5,9 +5,9 @@ $('#idea-card-storage').on('click', '.upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '.downvote-button', downvoteQuality);
 $('#idea-card-storage').on('blur', '.card-title', changeIdeaTitle);
 $('#idea-card-storage').on('blur', '.card-body', changeIdeaBody);
-$('#search-bar-input').on('keyup', searchString);
 $('#idea-card-storage').on('keypress', '.card-title', updateTitle);
 $('#idea-card-storage').on('keypress', '.card-body', updateBody);
+$('#search-bar-input').on('keyup', searchString);
 
 function IdeaCardObject(id, title, body) {
   this.id = id;
@@ -63,7 +63,7 @@ function prependIdeaCard(id, title, body, quality) {
       </div>
     </article>
     `
-    );
+  );
 }
 
 function findExistingCards() {
@@ -73,13 +73,6 @@ function findExistingCards() {
     keyValues.push(JSON.parse(localStorage.getItem(keys[i])));
   }
   return keyValues;
-}
-
-function showCards(cards = []) {
-  for(var i = 0; i < cards.length; i++){
-    var card = cards[i];
-    $('#idea-card-storage').prepend(IdeaCardObject(card));
-  }
 }
 
 function addIdeaCard() {
