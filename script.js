@@ -5,6 +5,8 @@ $('#idea-card-storage').on('click', '.upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '.downvote-button', downvoteQuality);
 $('.card-title').on('blur', changeIdeaTitle);
 $('.card-body').on('blur', changeIdeaBody);
+$('#search-bar-input').on('keyup', searchString);
+
 
   // function() {
 
@@ -173,4 +175,20 @@ function changeIdeaBody() {
   var cardObject = getObjectFromStorage(cardId);
   cardObject.body = currentBody;
   sendUpdatesToLocalStorage(cardObject);
+}
+
+function clearAllCards() {
+  $('#idea-card-storage').text('');
+}
+
+function searchString() {
+  var cardObjectsArray = findExistingCards();
+  var userSearchInput = $('#search-bar-input').val();
+  var lowercaseSearchInput = userSearchInput.toLowerCase();
+  var filteredCards = cardObjectsArray.filter(function (object){
+    return object['body'].match(lowercaseSearchInput) || object['title'].match(lowercaseSearchInput);
+    }
+  ) 
+  clearAllCards();
+  populateExistingCards(filteredCards);
 }
