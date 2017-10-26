@@ -139,6 +139,11 @@ function downvoteQuality() {
     currentIndex--;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
+  
+  var cardId = parseInt($(this).closest('article').attr('id'));
+  var cardObject = getObjectFromStorage(cardId);
+  cardObject.quality = qualityArray[currentIndex];
+  sendUpdatesToLocalStorage(cardObject);
 }
 
 function getObjectFromStorage(cardId) {
