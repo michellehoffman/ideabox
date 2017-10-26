@@ -54,6 +54,10 @@ input::placeholder {
   text-align: center;
   width: 100%;
 }
+
+.search-bar {
+  text-align: center;
+}
   
 /*IDEA CARDS*/
 article {
