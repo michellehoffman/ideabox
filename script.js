@@ -1,8 +1,8 @@
 $(document).ready(populateExistingCards(findExistingCards()));
 $('#save-button').on('click', createCard);
-$('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard);
-$('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
-$('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
+$('#idea-card-storage').on('click', '.delete-button', deleteIdeaCard);
+$('#idea-card-storage').on('click', '.upvote-button', upvoteQuality);
+$('#idea-card-storage').on('click', '.downvote-button', downvoteQuality);
 $('.card-title').on('blur', changeIdeaTitle);
 $('.card-body').on('blur', changeIdeaBody);
 
