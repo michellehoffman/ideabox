@@ -159,12 +159,11 @@ function clearAllCards() {
 
 function searchString() {
   var cardObjectsArray = findExistingCards();
-  var userSearchInput = $('#search-bar-input').val();
-  var lowercaseSearchInput = userSearchInput.toLowerCase();
+  var userSearchInput = $('#search-bar-input').val().toLowerCase();
   var filteredCards = cardObjectsArray.filter(function (object){
     var lowercaseObjectBody = object['body'].toLowerCase();
     var lowercaseObjectTitle = object['title'].toLowerCase();
-    return lowercaseObjectBody.match(lowercaseSearchInput) || lowercaseObjectTitle.match(lowercaseSearchInput);
+    return lowercaseObjectBody.match(userSearchInput) || lowercaseObjectTitle.match(userSearchInput);
     }
   ) 
   clearAllCards();
