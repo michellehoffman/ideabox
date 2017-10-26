@@ -1,6 +1,5 @@
 $(document).ready(populateExistingCards(findExistingCards()));
 $('#save-button').on('click', createCard);
-$('#idea-card-storage').on('click', '#upvote-button', getObjectFromStorage);
 $('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard);
 $('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
@@ -33,6 +32,11 @@ function sendCardToLocalStorage(newCard) {
   retrieveObjPutOnPage(newCard.id);
 }
 
+function sendUpdatesToLocalStorage(updatedObject) {
+  var stringifiedObject = JSON.stringify(updatedObject);
+  localStorage.setItem(updatedObject.id, stringifiedObject);
+}
+
 function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
@@ -47,8 +51,6 @@ function populateExistingCards(keyValues) {
 }
 
 function prependIdeaCard(id, title, body) {
-  var quality = ['swill', 'plausible', 'genius'];
-
   $('#idea-card-storage').prepend(
     `
     <article class="idea-card" id="
@@ -72,7 +74,7 @@ function prependIdeaCard(id, title, body) {
       <button id="upvote-button" name="upvote button"></button>
       <button id="downvote-button" name="downvote button"></button>
       <h3 class="quality">quality:</h3>
-      <h3 class="quality-option">${quality[0]}</h3>
+      <h3 class="quality-option">swill</h3>
     </div>
     </article>
     `
@@ -121,6 +123,11 @@ function upvoteQuality() {
     currentIndex++;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
+
+  var cardId = parseInt($(this).closest('article').attr('id'));
+  var cardObject = getObjectFromStorage(cardId);
+  cardObject.quality = qualityArray[currentIndex];
+  sendUpdatesToLocalStorage(cardObject);
 }
 
 function downvoteQuality() {
@@ -134,10 +141,8 @@ function downvoteQuality() {
   }
 }
 
-function getObjectFromStorage() {
-  var cardId = parseInt($(this).closest('article').attr('id'));
+function getObjectFromStorage(cardId) {
   var retrievedObject = localStorage.getItem(cardId);
   var parsedObject = JSON.parse(retrievedObject);
-  console.log(parsedObject.quality);
-
+  return parsedObject;
 }
