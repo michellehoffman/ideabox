@@ -54,7 +54,11 @@ input::placeholder {
   text-align: center;
   width: 100%;
 }
-  
+
+#search-section {
+  background-color: #FFF;
+}
+
 /*IDEA CARDS*/
 article {
   border-bottom: 1px solid #939598;
