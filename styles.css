@@ -89,28 +89,28 @@ button {
   padding: 0px;
 }
 
-#delete-button {
+.delete-button {
   background-image: url('FEE-ideabox-icon-assets/delete.svg');
   float: right;
 }
 
-#delete-button:hover {
+.delete-button:hover {
   background-image: url('FEE-ideabox-icon-assets/delete-hover.svg');
 }
 
-#upvote-button {
+.upvote-button {
   background-image: url('FEE-ideabox-icon-assets/upvote.svg');
 }
 
-#upvote-button:hover {
+.upvote-button:hover {
   background-image: url('FEE-ideabox-icon-assets/upvote-hover.svg');
 } 
 
-#downvote-button {
+.downvote-button {
   background-image: url('FEE-ideabox-icon-assets/downvote.svg');
 }
 
-#downvote-button:hover {
+.downvote-button:hover {
   background-image: url('FEE-ideabox-icon-assets/downvote-hover.svg');
 }
 
