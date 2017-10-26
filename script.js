@@ -3,15 +3,18 @@ $('#save-button').on('click', createCard);
 $('#idea-card-storage').on('click', '#delete-button', deleteIdeaCard);
 $('#idea-card-storage').on('click', '#upvote-button', upvoteQuality);
 $('#idea-card-storage').on('click', '#downvote-button', downvoteQuality);
+$('.card-title').on('blur', changeIdeaTitle);
+$('.card-body').on('blur', changeIdeaBody);
 
-// $('.card-title').on('blur', function(e) {
-//   if (e.keyCode == 13) {
-//     //Prevent insertion of a return
-//     //You could do other things here, for example
-//     //focus on the next field
-//     $(this).parent().focus();
+  // function() {
+
+  // if (e.keyCode == 13) {
+  //   //Prevent insertion of a return
+  //   //You could do other things here, for example
+  //   //focus on the next field
+  //   $(this).parent().focus();
 //   }
-// });
+// };
 
 function IdeaCardObject(id, title, body) {
   this.id = id;
@@ -154,4 +157,20 @@ function getObjectFromStorage(cardId) {
   var retrievedObject = localStorage.getItem(cardId);
   var parsedObject = JSON.parse(retrievedObject);
   return parsedObject;
+}
+
+function changeIdeaTitle() {
+  var currentTitle = $(this).text();
+  var cardId = parseInt($(this).closest('article').attr('id'));
+  var cardObject = getObjectFromStorage(cardId);
+  cardObject.title = currentTitle;
+  sendUpdatesToLocalStorage(cardObject);
+}
+
+function changeIdeaBody() {
+  var currentBody = $(this).text();
+  var cardId = parseInt($(this).closest('article').attr('id'));
+  var cardObject = getObjectFromStorage(cardId);
+  cardObject.body = currentBody;
+  sendUpdatesToLocalStorage(cardObject);
 }
