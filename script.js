@@ -97,8 +97,8 @@ function upvoteQuality() {
   var currentQuality = $(this).siblings('.quality-option').text();
   var currentIndex = qualityArray.indexOf(currentQuality);
 
-  if(currentIndex < 2) {
-    currentIndex++;
+  if (currentIndex < 2) {
+    currentIndex ++;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
 
