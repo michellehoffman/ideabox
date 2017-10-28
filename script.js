@@ -35,6 +35,7 @@ function createCard() {
   event.preventDefault();
   var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val());
   sendCardToLocalStorage(newCard);
+  clearInputs();
 }
 
 function sendCardToLocalStorage(newCard) {
@@ -52,7 +53,6 @@ function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality);
-  clearInputs();
 }
 
 function populateExistingCards(keyValues) {
@@ -170,11 +170,8 @@ function searchString() {
   var cardObjectsArray = findExistingCards();
   var userSearchInput = $('#search-bar-input').val().toLowerCase();
   var filteredCards = cardObjectsArray.filter(function (object){
-    var lowercaseObjectBody = object['body'].toLowerCase();
-    var lowercaseObjectTitle = object['title'].toLowerCase();
-    return lowercaseObjectBody.match(userSearchInput) || lowercaseObjectTitle.match(userSearchInput);
-    }
-  ) 
+    return (object['body'].toLowerCase()).match(userSearchInput) || (object['title'].toLowerCase()).match(userSearchInput);
+    }) 
   clearAllCards();
   populateExistingCards(filteredCards);
 }
