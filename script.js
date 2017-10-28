@@ -1,4 +1,6 @@
 $(document).ready(populateExistingCards(findExistingCards()));
+$('#title-input').on('keyup', taskInputValidation);
+$('#body-input').on('keyup', taskInputValidation);
 $('#save-button').on('click', createCard);
 $('#idea-card-storage').on('click', '.delete-button', deleteIdeaCard);
 $('#idea-card-storage').on('click', '.upvote-button', upvoteQuality);
@@ -8,6 +10,24 @@ $('#idea-card-storage').on('blur', '.card-body', changeIdeaBody);
 $('#idea-card-storage').on('keypress', '.card-title', updateTitle);
 $('#idea-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
+
+function taskInputValidation () {
+  if (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) {
+    $('#save-button').attr('disabled', true);
+  }
+  else if (($('#title-input').val() !== ('')) && ($('#body-input').val() === (''))) {
+    $('#save-button').attr('disabled', true);
+  }
+  else {
+    enableSaveButton();
+  }
+}
+
+function enableSaveButton() {
+  if (('#save-button').diabled = true) {
+    $('#save-button').removeAttr('disabled', false);
+  }
+}
 
 function IdeaCardObject(id, title, body) {
   this.id = id;
@@ -90,6 +110,7 @@ function deleteIdeaCard() {
 function clearInputs() {
   $('#title-input').val('');
   $('#body-input').val('');
+  $('#title-input').focus();
 }
 
 function upvoteQuality() {
