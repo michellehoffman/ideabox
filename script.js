@@ -12,15 +12,10 @@ $('#idea-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
 
 function taskInputValidation () {
-  if (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) {
-    $('#save-button').attr('disabled', true);
-  }
-  else if (($('#title-input').val() !== ('')) && ($('#body-input').val() === (''))) {
-    $('#save-button').attr('disabled', true);
-  }
-  else {
-    enableSaveButton();
-  }
+  return (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) ? $('#save-button').attr('disabled', true)
+  : (($('#title-input').val() !== ('')) && ($('#body-input').val() === (''))) ? $('#save-button').attr('disabled', true)
+  : (($('#title-input').val() === ('')) && ($('#body-input').val() === (''))) ? $('#save-button').attr('disabled', true)
+  : enableSaveButton();
 }
 
 function enableSaveButton() {
