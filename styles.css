@@ -8,32 +8,16 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-#save-button {
-  background-color: #00A79D;
-  border-color: #00A79D;
-  border-radius: 0px;
-  color: #FFFFFF;
-  font-size: 20px;
-  width: 50%;
-}
-
-#save-button:hover {
-  background-color: #045E55;
-}
-
-#save-button,
-input {
-  display: inline-block;
-  height: 40px;
-  margin: 10px;
-}
-
 h1 {
   color: #00A79D;
   font-family: 'Roboto Slab', serif;
   font-size: 6vw;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+span{
+  color: #6D6E71;
 }
 
 input {
@@ -47,6 +31,25 @@ input::placeholder {
   color: #939598;
 }
 
+.form-position {
+  display: inline-block;
+  height: 40px;
+  margin: 10px;
+}
+
+#save-button {
+  background-color: #00A79D;
+  border-color: #00A79D;
+  border-radius: 0px;
+  color: #FFFFFF;
+  font-size: 20px;
+  width: 50%;
+}
+
+#save-button:hover {
+  background-color: #045E55;
+}
+
 .user-input {
   background-color: #E5F3F2;
   padding: 30px 0px 20px 0px;
@@ -58,6 +61,7 @@ input::placeholder {
   padding-top: 20px;
   text-align: center;
 }
+  
   
 /*IDEA CARDS*/
 article {
