@@ -57,7 +57,6 @@ function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality);
-  clearInputs();
 }
 
 function populateExistingCards(keyValues) {
@@ -68,8 +67,7 @@ function populateExistingCards(keyValues) {
 
 function prependIdeaCard(id, title, body, quality) {
   $('#idea-card-storage').prepend(
-    `
-    <article class="idea-card" id="${id}">
+    `<article class="idea-card" id="${id}">
       <div class="card-header">
         <h2 class="card-title" contenteditable="true">${title}</h2> 
         <button class="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
@@ -78,11 +76,9 @@ function prependIdeaCard(id, title, body, quality) {
       <div class="card-footer">
         <button class="upvote-button" name="upvote button"></button>
         <button class="downvote-button" name="downvote button"></button>
-        <h3 class="quality">quality:</h3>
         <h3 class="quality-option">${quality}</h3>
       </div>
-    </article>
-    `
+    </article>`
   );
 }
 
@@ -109,40 +105,67 @@ function deleteIdeaCard() {
 
 function clearInputs() {
   $('#title-input').val('');
-  $('#body-input').val('');
+  $('#body-input').val('')
   $('#title-input').focus();
 }
 
+// function upvoteQuality() {
+//   console.log($(this).closest().find('h3').text())
+//   var qualityArray = ['swill', 'plausible', 'genius'];
+//   var currentQuality = $(this).siblings('.quality-option').text();
+//   var currentIndex = qualityArray.indexOf(currentQuality);
+
+//   if(currentIndex < 2) {
+//     currentIndex++;
+//     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
+//   }
+
+//   var cardId = parseInt($(this).closest('article').attr('id'));
+//   var cardObject = getObjectFromStorage(cardId);
+//   cardObject.quality = qualityArray[currentIndex];
+//   sendUpdatesToLocalStorage(cardObject);
+// }
+
 function upvoteQuality() {
-  var qualityArray = ['swill', 'plausible', 'genius'];
-  var currentQuality = $(this).siblings('.quality-option').text();
-  var currentIndex = qualityArray.indexOf(currentQuality);
-
-  if(currentIndex < 2) {
-    currentIndex++;
-    currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
-  }
-
   var cardId = parseInt($(this).closest('article').attr('id'));
-  var cardObject = getObjectFromStorage(cardId);
-  cardObject.quality = qualityArray[currentIndex];
-  sendUpdatesToLocalStorage(cardObject);
+  var cardObject = getObjectFromStorage(cardId)
+  var quality = $(this).parent().find('h3').text()
+  if(quality === 'swill') {
+    $(this).parent().find('h3').text("plausible")
+    sendUpdatesToLocalStorage(cardObject);
+  } else {
+    $(this).parent().find('h3').text('genius');
+    sendUpdatesToLocalStorage(cardObject);
+  }
 }
 
-function downvoteQuality() {
-  var qualityArray = ['swill', 'plausible', 'genius'];
-  var currentQuality = $(this).siblings('.quality-option').text();
-  var currentIndex = qualityArray.indexOf(currentQuality);
+// function downvoteQuality() {
+//   var qualityArray = ['swill', 'plausible', 'genius'];
+//   var currentQuality = $(this).siblings('.quality-option').text();
+//   var currentIndex = qualityArray.indexOf(currentQuality);
 
-  if(currentIndex > 0){
-    currentIndex--;
-    currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
-  }
+//   if(currentIndex > 0){
+//     currentIndex--;
+//     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
+//   }
   
+//   var cardId = parseInt($(this).closest('article').attr('id'));
+//   var cardObject = getObjectFromStorage(cardId);
+//   cardObject.quality = qualityArray[currentIndex];
+//   sendUpdatesToLocalStorage(cardObject);
+// }
+
+function downvoteQuality() {
   var cardId = parseInt($(this).closest('article').attr('id'));
-  var cardObject = getObjectFromStorage(cardId);
-  cardObject.quality = qualityArray[currentIndex];
-  sendUpdatesToLocalStorage(cardObject);
+  var cardObject = getObjectFromStorage(cardId)
+  var quality = $(this).parent().find('h3').text()
+  if(quality === 'genius') {
+    $(this).parent().find('h3').text("plausible")
+    sendUpdatesToLocalStorage(cardObject);
+  } else {
+    $(this).parent().find('h3').text('swill');
+    sendUpdatesToLocalStorage(cardObject);
+  }
 }
 
 function getObjectFromStorage(cardId) {
@@ -183,6 +206,17 @@ function searchString() {
   clearAllCards();
   populateExistingCards(filteredCards);
 }
+
+// function searchString() {
+//   var searchTitle = $('#title-input').val();
+//   var searchTask = $('#body-input').val();
+//   var currentArticle = searchTitle[i].text() + searchTask[i].text();
+//   for (var i = currentArticle.length - 1; i >= 0; i--) {
+//     currentArticle[i]
+//     if(currentArticle = $(#search-bar-input).text())
+//       display
+//   }
+// }
 
 function updateTitle(event) {
   if (13 == event.keyCode) {
