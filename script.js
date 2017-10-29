@@ -113,33 +113,12 @@ function upvoteQuality() {
   : ($(this).parent().find('h3').text('genius'), cardObject.quality = "genius", sendUpdatesToLocalStorage(cardObject))
 }
 
-// function downvoteQuality() {
-//   var qualityArray = ['swill', 'plausible', 'genius'];
-//   var currentQuality = $(this).siblings('.quality-option').text();
-//   var currentIndex = qualityArray.indexOf(currentQuality);
-
-//   if(currentIndex > 0){
-//     currentIndex--;
-//     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
-//   }
-  
-//   var cardId = parseInt($(this).closest('article').attr('id'));
-//   var cardObject = getObjectFromStorage(cardId);
-//   cardObject.quality = qualityArray[currentIndex];
-//   sendUpdatesToLocalStorage(cardObject);
-// }
-
 function downvoteQuality() {
   var cardId = parseInt($(this).closest('article').attr('id'));
-  var cardObject = getObjectFromStorage(cardId)
-  var quality = $(this).parent().find('h3').text()
-  if(quality === 'genius') {
-    $(this).parent().find('h3').text("plausible")
-    sendUpdatesToLocalStorage(cardObject);
-  } else {
-    $(this).parent().find('h3').text('swill');
-    sendUpdatesToLocalStorage(cardObject);
-  }
+  var cardObject = getObjectFromStorage(cardId);
+  return ($(this).parent().find('h3').text() === 'genius') ? ($(this).parent().find('h3').text("plausible"), 
+  cardObject.quality = "plausible", sendUpdatesToLocalStorage(cardObject))
+  : ($(this).parent().find('h3').text('swill'), cardObject.quality = "swill", sendUpdatesToLocalStorage(cardObject))
 }
 
 function getObjectFromStorage(cardId) {
