@@ -105,34 +105,12 @@ function clearInputs() {
   $('#title-input').focus();
 }
 
-// function upvoteQuality() {
-//   console.log($(this).closest().find('h3').text())
-//   var qualityArray = ['swill', 'plausible', 'genius'];
-//   var currentQuality = $(this).siblings('.quality-option').text();
-//   var currentIndex = qualityArray.indexOf(currentQuality);
-
-//   if(currentIndex < 2) {
-//     currentIndex++;
-//     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
-//   }
-
-//   var cardId = parseInt($(this).closest('article').attr('id'));
-//   var cardObject = getObjectFromStorage(cardId);
-//   cardObject.quality = qualityArray[currentIndex];
-//   sendUpdatesToLocalStorage(cardObject);
-// }
-
 function upvoteQuality() {
   var cardId = parseInt($(this).closest('article').attr('id'));
-  var cardObject = getObjectFromStorage(cardId)
-  var quality = $(this).parent().find('h3').text()
-  if(quality === 'swill') {
-    $(this).parent().find('h3').text("plausible")
-    sendUpdatesToLocalStorage(cardObject);
-  } else {
-    $(this).parent().find('h3').text('genius');
-    sendUpdatesToLocalStorage(cardObject);
-  }
+  var cardObject = getObjectFromStorage(cardId);
+  return ($(this).parent().find('h3').text() === 'swill') ? ($(this).parent().find('h3').text("plausible"), 
+  cardObject.quality = "plausible", sendUpdatesToLocalStorage(cardObject))
+  : ($(this).parent().find('h3').text('genius'), cardObject.quality = "genius", sendUpdatesToLocalStorage(cardObject))
 }
 
 // function downvoteQuality() {
