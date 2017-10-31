@@ -96,8 +96,12 @@ p {
   margin-bottom: 30px;
 }
 
+.greyed-out {
+  background-color: lightgrey; 
+}
+
 /*SVG BUTTONS*/
-button {
+.button {
   background-color: white;
   border: none;
   display: inline-block;

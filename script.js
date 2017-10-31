@@ -10,6 +10,7 @@ $('#idea-card-storage').on('blur', '.card-body', changeIdeaBody);
 $('#idea-card-storage').on('keypress', '.card-title', updateTitle);
 $('#idea-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
+$('#idea-card-storage').on('click', '.complete-btn', completeTask);
 
 function taskInputValidation () {
   return (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) ? $('#save-button').attr('disabled', true)
@@ -66,13 +67,14 @@ function prependIdeaCard(id, title, body, quality) {
     `<article class="idea-card" id="${id}">
       <div class="card-header">
         <h2 class="card-title" contenteditable="true">${title}</h2> 
-        <button class="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
+        <button class="delete-button button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
       </div>
       <p class="card-body" contenteditable="true">${body}</p>
       <div class="card-footer">
-        <button class="upvote-button" name="upvote button"></button>
-        <button class="downvote-button" name="downvote button"></button>
+        <button class="upvote-button button" name="upvote button"></button>
+        <button class="downvote-button button" name="downvote button"></button>
         <h3 class="quality-option">${quality}</h3>
+        <button class="complete-btn" name="complete button">Completed Task</button>
       </div>
     </article>`
   );
@@ -193,4 +195,8 @@ function updateBody(event) {
     cardObject.body = $(this).closest('.card-body').text();
     sendUpdatesToLocalStorage(cardObject);
   }
+}
+
+function completeTask () {
+  $(this).closest(".idea-card").toggleClass("greyed-out");
 }
