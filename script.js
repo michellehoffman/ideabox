@@ -30,6 +30,7 @@ function IdeaCardObject(id, title, body) {
   this.title = title;
   this.body = body;
   this.quality = 'swill';
+  this.completed = false;
 }
 
 function createCard() {
@@ -53,7 +54,8 @@ function sendUpdatesToLocalStorage(updatedObject) {
 function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
-  prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality);
+  (parsedObject.completed === true) ? $(".greyed-out").hide() :
+  prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality, parsedObject.completed);
 }
 
 function populateExistingCards(keyValues) {
@@ -62,7 +64,7 @@ function populateExistingCards(keyValues) {
   }
 }
 
-function prependIdeaCard(id, title, body, quality) {
+function prependIdeaCard(id, title, body, quality, completed) {
   $('#idea-card-storage').prepend(
     `<article class="idea-card" id="${id}">
       <div class="card-header">
@@ -198,5 +200,15 @@ function updateBody(event) {
 }
 
 function completeTask () {
-  $(this).closest(".idea-card").toggleClass("greyed-out");
+  this.completed = !this.completed;
+  var cardId = parseInt($(this).closest('article').attr('id'));
+  var cardObject = getObjectFromStorage(cardId);
+  cardObject.completed = this.completed;
+  if (cardObject.completed === true) {
+    console.log($(this).parent);
+    $(this).closest(".idea-card").addClass("greyed-out");
+
+  }
+  sendUpdatesToLocalStorage(cardObject);
+  
 }
