@@ -11,6 +11,7 @@ $('#idea-card-storage').on('keypress', '.card-title', updateTitle);
 $('#idea-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
 $('#idea-card-storage').on('click', '.complete-btn', completeTask);
+$('.show-todos').on('click', showToDos);
 
 function taskInputValidation () {
   return (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) ? $('#save-button').attr('disabled', true)
@@ -29,7 +30,7 @@ function IdeaCardObject(id, title, body) {
   this.id = id;
   this.title = title;
   this.body = body;
-  this.quality = 'swill';
+  this.quality = 'Normal';
   this.completed = false;
 }
 
@@ -61,6 +62,7 @@ function retrieveObjPutOnPage(id) {
 function populateExistingCards(keyValues) {
   for (var i = 0; i < keyValues.length; i++) {
     retrieveObjPutOnPage(keyValues[i].id);
+    showToDos(keyValues[i].id);
   }
 }
 
@@ -110,11 +112,11 @@ function clearInputs() {
 }
 
 function upvoteQuality() {
-  var qualityArray = ['swill', 'plausible', 'genius'];
+  var qualityArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
   var currentQuality = $(this).siblings('.quality-option').text();
   var currentIndex = qualityArray.indexOf(currentQuality);
 
-  if(currentIndex < 2) {
+  if(currentIndex < 4) {
     currentIndex++;
     currentQuality = $(this).siblings('.quality-option').text(qualityArray[currentIndex]);
   }
@@ -126,7 +128,7 @@ function upvoteQuality() {
 }
 
 function downvoteQuality() {
-  var qualityArray = ['swill', 'plausible', 'genius'];
+  var qualityArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
   var currentQuality = $(this).siblings('.quality-option').text();
   var currentIndex = qualityArray.indexOf(currentQuality);
 
@@ -205,10 +207,17 @@ function completeTask () {
   var cardObject = getObjectFromStorage(cardId);
   cardObject.completed = this.completed;
   if (cardObject.completed === true) {
-    console.log($(this).parent);
     $(this).closest(".idea-card").addClass("greyed-out");
-
   }
   sendUpdatesToLocalStorage(cardObject);
-  
+}
+
+function showToDos (id) {  
+
+  var retrievedObject = localStorage.getItem(id);
+  var parsedObject = JSON.parse(retrievedObject);
+  console.log(parsedObject.completed);
+  if (parsedObject.completed === true) {
+    // prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality, parsedObject.completed);
+  }
 }
