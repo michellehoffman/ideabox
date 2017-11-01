@@ -229,7 +229,7 @@ function showToDos () {
  
   if (parsedObject.completed === true) {
     var cardId = parsedObject.id;
-    $(`#${cardId}:hidden`).show();
+    $('#task-card-storage').prepend($(`#${cardId}:hidden`).show());
     $(`#${cardId}`).closest(".task-card").toggleClass("greyed-out");
   }
 }
