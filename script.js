@@ -2,15 +2,15 @@ $(document).ready(populateExistingCards(findExistingCards()));
 $('#title-input').on('keyup', taskInputValidation);
 $('#body-input').on('keyup', taskInputValidation);
 $('#save-button').on('click', createCard);
-$('#idea-card-storage').on('click', '.delete-button', deleteIdeaCard);
-$('#idea-card-storage').on('click', '.upvote-button', upvoteQuality);
-$('#idea-card-storage').on('click', '.downvote-button', downvoteQuality);
-$('#idea-card-storage').on('blur', '.card-title', changeIdeaTitle);
-$('#idea-card-storage').on('blur', '.card-body', changeIdeaBody);
-$('#idea-card-storage').on('keypress', '.card-title', updateTitle);
-$('#idea-card-storage').on('keypress', '.card-body', updateBody);
+$('#task-card-storage').on('click', '.delete-button', deleteTaskCard);
+$('#task-card-storage').on('click', '.upvote-button', upvoteQuality);
+$('#task-card-storage').on('click', '.downvote-button', downvoteQuality);
+$('#task-card-storage').on('blur', '.card-title', changeTaskTitle);
+$('#task-card-storage').on('blur', '.card-body', changeTaskBody);
+$('#task-card-storage').on('keypress', '.card-title', updateTitle);
+$('#task-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
-$('#idea-card-storage').on('click', '.complete-btn', completeTask);
+$('#task-card-storage').on('click', '.complete-btn', completeTask);
 $('.show-todos').on('click', showToDos);
 
 function taskInputValidation () {
@@ -26,7 +26,7 @@ function enableSaveButton() {
   }
 }
 
-function IdeaCardObject(id, title, body) {
+function taskCardObject(id, title, body) {
   this.id = id;
   this.title = title;
   this.body = body;
@@ -36,7 +36,7 @@ function IdeaCardObject(id, title, body) {
 
 function createCard() {
   event.preventDefault();
-  var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val());
+  var newCard = new taskCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val());
   sendCardToLocalStorage(newCard);
   clearInputs();
 }
@@ -55,23 +55,29 @@ function sendUpdatesToLocalStorage(updatedObject) {
 function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
-  (parsedObject.completed === true) ? $(".greyed-out").hide() :
-  prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality, parsedObject.completed);
+  // (parsedObject.completed === true) ? $(".greyed-out").hide() :
+  prependTaskCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality, parsedObject.completed);
 }
 
 function populateExistingCards(keyValues) {
   for (var i = 0; i < keyValues.length; i++) {
-    retrieveObjPutOnPage(keyValues[i].id);
-    showToDos(keyValues[i].id);
+    retrieveObjPutOnPage(keyValues[i].id);  
+    if (keyValues[i].completed === false) {
+        
+    }
+    // else if (keyValues[i].completed === true) {
+    // retrieveObjPutOnPage(keyValues[i].id).hide();  
+    // console.log(keyValues[i] + "on load");
+    // }
   }
 }
 
-function prependIdeaCard(id, title, body, quality, completed) {
-  $('#idea-card-storage').prepend(
-    `<article class="idea-card" id="${id}">
+function prependTaskCard(id, title, body, quality, completed) {
+  $('#task-card-storage').prepend(
+    `<article class="task-card" id="${id}">
       <div class="card-header">
         <h2 class="card-title" contenteditable="true">${title}</h2> 
-        <button class="delete-button button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
+        <button class="delete-button button" name="delete button"><img src="FEE-taskbox-icon-assets/transparent.png" width="30px" height="30px"></button>
       </div>
       <p class="card-body" contenteditable="true">${body}</p>
       <div class="card-footer">
@@ -93,13 +99,13 @@ function findExistingCards() {
   return keyValues;
 }
 
-function addIdeaCard() {
+function addTaskCard() {
   event.preventDefault();
-  prependIdeaCard();
+  prependTaskCard();
   clearInputs();
 }
 
-function deleteIdeaCard() {
+function deleteTaskCard() {
   $(this).closest('article').remove();
   var cardId = $(this).closest('article').attr('id');
   localStorage.removeItem(JSON.parse(cardId));
@@ -149,7 +155,7 @@ function getObjectFromStorage(cardId) {
   return parsedObject;
 }
 
-function changeIdeaTitle() {
+function changeTaskTitle() {
   var currentTitle = $(this).text();
   var cardId = parseInt($(this).closest('article').attr('id'));
   var cardObject = getObjectFromStorage(cardId);
@@ -157,7 +163,7 @@ function changeIdeaTitle() {
   sendUpdatesToLocalStorage(cardObject);
 }
 
-function changeIdeaBody() {
+function changeTaskBody() {
   var currentBody = $(this).text();
   var cardId = parseInt($(this).closest('article').attr('id'));
   var cardObject = getObjectFromStorage(cardId);
@@ -166,7 +172,7 @@ function changeIdeaBody() {
 }
 
 function clearAllCards() {
-  $('#idea-card-storage').text('');
+  $('#task-card-storage').text('');
 }
 
 function searchString() {
@@ -207,17 +213,21 @@ function completeTask () {
   var cardObject = getObjectFromStorage(cardId);
   cardObject.completed = this.completed;
   if (cardObject.completed === true) {
-    $(this).closest(".idea-card").addClass("greyed-out");
+    $(this).closest(".task-card").toggleClass("greyed-out");
   }
   sendUpdatesToLocalStorage(cardObject);
 }
 
-function showToDos (id) {  
-
-  var retrievedObject = localStorage.getItem(id);
+function showToDos () {  
+  // populateExistingCards(findExistingCards());
+  for (var i = 0; i < localStorage.length; i++) {
+  var retrievedObject = localStorage.getItem(localStorage.key(i));
   var parsedObject = JSON.parse(retrievedObject);
-  console.log(parsedObject.completed);
+ 
   if (parsedObject.completed === true) {
-    // prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality, parsedObject.completed);
+    var cardId = parsedObject.id;
+    console.log(cardId);
+    $(`#${cardId}:hidden`).show();
   }
+  } 
 }
