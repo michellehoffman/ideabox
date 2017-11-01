@@ -12,6 +12,11 @@ $('#task-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
 $('#task-card-storage').on('click', '.complete-btn', completeTask);
 $('.show-todos').on('click', showToDos);
+$('.critical-btn').on('click', critical);
+$('.high-btn').on('click', high);
+$('.normal-btn').on('click', normal);
+$('.low-btn').on('click', low);
+$('.none-btn').on('click', none);
 
 function taskInputValidation () {
   return (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) ? $('#save-button').attr('disabled', true)
@@ -234,3 +239,97 @@ function showToDos () {
   }
 }
 }
+
+function critical() {
+  for (var i = 0; i < localStorage.length; i++) {
+  var retrievedObject = localStorage.getItem(localStorage.key(i));
+  var parsedObject = JSON.parse(retrievedObject);
+  var cardId = parsedObject.id;
+
+  if (parsedObject.quality == "Critical") {
+    $('#task-card-storage').prepend($(`#${cardId}`).show());
+    
+  } else {
+    $('#task-card-storage').prepend($(`#${cardId}`).hide());
+  }
+}
+}
+
+function high() {
+  for (var i = 0; i < localStorage.length; i++) {
+  var retrievedObject = localStorage.getItem(localStorage.key(i));
+  var parsedObject = JSON.parse(retrievedObject);
+  var cardId = parsedObject.id;
+
+  if (parsedObject.quality == "High") {
+    $('#task-card-storage').prepend($(`#${cardId}`).show());
+    
+  } else {
+    $('#task-card-storage').prepend($(`#${cardId}`).hide());
+  }
+}
+}
+
+function normal() {
+  for (var i = 0; i < localStorage.length; i++) {
+  var retrievedObject = localStorage.getItem(localStorage.key(i));
+  var parsedObject = JSON.parse(retrievedObject);
+  var cardId = parsedObject.id;
+
+  if (parsedObject.quality == "Normal") {
+    $('#task-card-storage').prepend($(`#${cardId}`).show());
+    
+  } else {
+    $('#task-card-storage').prepend($(`#${cardId}`).hide());
+  }
+}
+}
+
+function low() {
+  for (var i = 0; i < localStorage.length; i++) {
+  var retrievedObject = localStorage.getItem(localStorage.key(i));
+  var parsedObject = JSON.parse(retrievedObject);
+  var cardId = parsedObject.id;
+
+  if (parsedObject.quality == "Low") {
+    $('#task-card-storage').prepend($(`#${cardId}`).show());
+    
+  } else {
+    $('#task-card-storage').prepend($(`#${cardId}`).hide());
+  }
+}
+}
+
+function none() {
+  for (var i = 0; i < localStorage.length; i++) {
+  var retrievedObject = localStorage.getItem(localStorage.key(i));
+  var parsedObject = JSON.parse(retrievedObject);
+  var cardId = parsedObject.id;
+
+  if (parsedObject.quality == "None") {
+    $('#task-card-storage').prepend($(`#${cardId}`).show());
+    
+  } else {
+    $('#task-card-storage').prepend($(`#${cardId}`).hide());
+  }
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
