@@ -55,21 +55,25 @@ function sendUpdatesToLocalStorage(updatedObject) {
 function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
-  // (parsedObject.completed === true) ? $(".greyed-out").hide() :
   prependTaskCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality, parsedObject.completed);
+  completedTaskView(parsedObject.id, parsedObject.completed);
 }
 
 function populateExistingCards(keyValues) {
   for (var i = 0; i < keyValues.length; i++) {
     retrieveObjPutOnPage(keyValues[i].id);  
-    if (keyValues[i].completed === false) {
-        
-    }
-    // else if (keyValues[i].completed === true) {
-    // retrieveObjPutOnPage(keyValues[i].id).hide();  
-    // console.log(keyValues[i] + "on load");
-    // }
   }
+}
+
+function completedTaskView(id, complete) {
+  for (var i = 0; i < complete; i++) {
+    if (complete[i] === false) {
+       $(`#${id}`).show();
+    }
+    else {
+       $(`#${id}`).hide();
+    }
+  }  
 }
 
 function prependTaskCard(id, title, body, quality, completed) {
@@ -219,15 +223,14 @@ function completeTask () {
 }
 
 function showToDos () {  
-  // populateExistingCards(findExistingCards());
   for (var i = 0; i < localStorage.length; i++) {
   var retrievedObject = localStorage.getItem(localStorage.key(i));
   var parsedObject = JSON.parse(retrievedObject);
  
   if (parsedObject.completed === true) {
     var cardId = parsedObject.id;
-    console.log(cardId);
-    $(`#${cardId}:hidden`).show();
+    $('#task-card-storage').prepend($(`#${cardId}:hidden`).show());
+    $(`#${cardId}`).closest(".task-card").toggleClass("greyed-out");
   }
-  } 
+}
 }
