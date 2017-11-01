@@ -66,29 +66,15 @@ function populateExistingCards(keyValues) {
 }
 
 function completedTaskView(id, complete) {
-  console.log(complete);
-  console.log(typeof complete);
   for (var i = 0; i < complete; i++) {
-    console.log(complete);
     if (complete[i] === false) {
-      console.log(`#${id}`);
-      console.log('yes')
        $(`#${id}`).show();
     }
     else {
-      console.log(`#${id}`);
-      console.log('nope');
        $(`#${id}`).hide();
     }
-    
   }  
-    // else if (keyValues[i].completed === true) {
-    //   $(".task-card").hide();  
-    // }
 }
-    // retrieveObjPutOnPage(keyValues[i].id).hide();  
-    // console.log(keyValues[i] + "on load");
-    // }
 
 function prependTaskCard(id, title, body, quality, completed) {
   $('#task-card-storage').prepend(
@@ -243,8 +229,8 @@ function showToDos () {
  
   if (parsedObject.completed === true) {
     var cardId = parsedObject.id;
-    console.log(cardId);
     $(`#${cardId}:hidden`).show();
+    $(`#${cardId}`).closest(".task-card").toggleClass("greyed-out");
   }
 }
 }
