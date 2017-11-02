@@ -8,32 +8,16 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-#save-button {
-  background-color: #00A79D;
-  border-color: #00A79D;
-  border-radius: 0px;
-  color: #FFFFFF;
-  font-size: 20px;
-  width: 50%;
-}
-
-#save-button:hover {
-  background-color: #045E55;
-}
-
-#save-button,
-input {
-  display: inline-block;
-  height: 40px;
-  margin: 10px;
-}
-
 h1 {
-  color: #00A79D;
+  color: #565264;
   font-family: 'Roboto Slab', serif;
   font-size: 6vw;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+span{
+  color: #A6808C;
 }
 
 input {
@@ -47,8 +31,50 @@ input::placeholder {
   color: #939598;
 }
 
+.form-position {
+  display: inline-block;
+  height: 40px;
+  margin: 10px;
+}
+
+#save-button {
+  background-color: #565264;
+  border: none;
+  color: #FFFFFF;
+  font-size: 20px;
+  width: 50%;
+}
+
+#save-button:hover {
+  background-color: #A6808C;
+  transition: background-color .3s ease;
+}
+
+.quality-btn{
+  border: .5px solid #565264;
+  background-color: #E6E6FA;
+  color: white;
+  width: 10%;
+}
+
+.todos{
+  border: .5px solid #565264;
+  background-color: #A6808C;
+  color: white;
+  width: 10%;
+}
+
+.complete-btn{
+  vertical-align: super;
+  margin-left: 40em;
+  border: .5px solid #565264;
+  background-color: #A6808C;
+  color: white;
+  width: 10%;
+}
+
 .user-input {
-  background-color: #E5F3F2;
+  background-color: #E6E6FA;
   padding: 30px 0px 20px 0px;
   text-align: center;
   width: 100%;
@@ -59,6 +85,14 @@ input::placeholder {
   text-align: center;
 }
   
+.filter-btn{
+  text-align: center;
+}
+  
+.more-btns{
+  text-align: center;
+}
+
 /*IDEA CARDS*/
 article {
   border-bottom: 1px solid #939598;
@@ -92,8 +126,12 @@ p {
   margin-bottom: 30px;
 }
 
+.greyed-out {
+  background-color: lightgrey; 
+}
+
 /*SVG BUTTONS*/
-button {
+.button {
   background-color: white;
   border: none;
   display: inline-block;
