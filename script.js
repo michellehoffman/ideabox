@@ -1,4 +1,6 @@
 $(document).ready(populateExistingCards(findExistingCards()));
+$('#title-input').on('keyup', taskInputValidation);
+$('#body-input').on('keyup', taskInputValidation);
 $('#save-button').on('click', createCard);
 $('#idea-card-storage').on('click', '.delete-button', deleteIdeaCard);
 $('#idea-card-storage').on('click', '.upvote-button', upvoteQuality);
@@ -8,6 +10,19 @@ $('#idea-card-storage').on('blur', '.card-body', changeIdeaBody);
 $('#idea-card-storage').on('keypress', '.card-title', updateTitle);
 $('#idea-card-storage').on('keypress', '.card-body', updateBody);
 $('#search-bar-input').on('keyup', searchString);
+
+function taskInputValidation () {
+  return (($('#title-input').val() === ('')) && ($('#body-input').val() !== (''))) ? $('#save-button').attr('disabled', true)
+  : (($('#title-input').val() !== ('')) && ($('#body-input').val() === (''))) ? $('#save-button').attr('disabled', true)
+  : (($('#title-input').val() === ('')) && ($('#body-input').val() === (''))) ? $('#save-button').attr('disabled', true)
+  : enableSaveButton();
+}
+
+function enableSaveButton() {
+  if (('#save-button').diabled = true) {
+    $('#save-button').removeAttr('disabled', false);
+  }
+}
 
 function IdeaCardObject(id, title, body) {
   this.id = id;
@@ -20,6 +35,7 @@ function createCard() {
   event.preventDefault();
   var newCard = new IdeaCardObject(id = Date.now(), $('#title-input').val(), $('#body-input').val());
   sendCardToLocalStorage(newCard);
+  clearInputs();
 }
 
 function sendCardToLocalStorage(newCard) {
@@ -37,7 +53,6 @@ function retrieveObjPutOnPage(id) {
   var retrievedObject = localStorage.getItem(id);
   var parsedObject = JSON.parse(retrievedObject);
   prependIdeaCard(parsedObject.id, parsedObject.title, parsedObject.body, parsedObject.quality);
-  clearInputs();
 }
 
 function populateExistingCards(keyValues) {
@@ -48,8 +63,7 @@ function populateExistingCards(keyValues) {
 
 function prependIdeaCard(id, title, body, quality) {
   $('#idea-card-storage').prepend(
-    `
-    <article class="idea-card" id="${id}">
+    `<article class="idea-card" id="${id}">
       <div class="card-header">
         <h2 class="card-title" contenteditable="true">${title}</h2> 
         <button class="delete-button" name="delete button"><img src="FEE-ideabox-icon-assets/transparent.png" width="30px" height="30px"></button>
@@ -58,11 +72,9 @@ function prependIdeaCard(id, title, body, quality) {
       <div class="card-footer">
         <button class="upvote-button" name="upvote button"></button>
         <button class="downvote-button" name="downvote button"></button>
-        <h3 class="quality">quality:</h3>
         <h3 class="quality-option">${quality}</h3>
       </div>
-    </article>
-    `
+    </article>`
   );
 }
 
@@ -89,7 +101,8 @@ function deleteIdeaCard() {
 
 function clearInputs() {
   $('#title-input').val('');
-  $('#body-input').val('');
+  $('#body-input').val('')
+  $('#title-input').focus();
 }
 
 function upvoteQuality() {
@@ -154,11 +167,8 @@ function searchString() {
   var cardObjectsArray = findExistingCards();
   var userSearchInput = $('#search-bar-input').val().toLowerCase();
   var filteredCards = cardObjectsArray.filter(function (object){
-    var lowercaseObjectBody = object['body'].toLowerCase();
-    var lowercaseObjectTitle = object['title'].toLowerCase();
-    return lowercaseObjectBody.match(userSearchInput) || lowercaseObjectTitle.match(userSearchInput);
-    }
-  ) 
+    return (object['body'].toLowerCase()).match(userSearchInput) || (object['title'].toLowerCase()).match(userSearchInput);
+    }) 
   clearAllCards();
   populateExistingCards(filteredCards);
 }
